@@ -159,7 +159,7 @@ export default {
           if(this.forgetData.phone == ''){
               this.forgetData.phoneTip = "请输入手机号码"
           }else{
-              this.$http.post('/api/register/sendcode',{
+              this.$http.post(this.GLOBAL.base_url+'/register/sendcode',{
               phone:this.forgetData.phone,
               type:this.type
           }).then(res=>{
@@ -199,15 +199,15 @@ export default {
              this.forgetdiffshow = false;
              this.forgetData.checkpasswordTip = "请再次输入密码"
          }else{
-             this.$http.post('/api/login/changepass',{
+             this.$http.post(this.GLOBAL.base_url+'/login/changepass',{
              phone:this.forgetData.phone,
              code:this.forgetData.code,
              password:this.forgetData.password,
              re_pass:this.forgetData.checkpassword
          }).then(res=>{
              if(res.data.code == "1"){
-                 console.log(res);
                  this.tip('success',res.data.msg);
+                 this.$router.push('/login');
              }else if(res.data.code == "0"){
                  this.tip('error',res.data.msg);
              }
@@ -245,7 +245,7 @@ export default {
        padding-left: 50px;
    }
    .forgetpassword-box-p{
-       font-family: PingFangSC;
+       font-family: "PingFangSC-Regular","Microsoft YaHei";
         font-size: 28px;
         font-weight: 500;
         color: #111111;
@@ -266,6 +266,7 @@ export default {
       height: 60px;
       color: #999999;
       font-size: 24px;
+      outline: none;
       border-radius: 6px;
       border: solid 1px #d3d3d3;
       background-color: #f3f3f3;
@@ -281,6 +282,7 @@ export default {
         float: left;
         width: 230px;
         height: 60px;
+        outline: none;
         font-size: 24px;
         color: #333333;
         border-radius: 6px;
@@ -295,7 +297,7 @@ export default {
         cursor: pointer;
         border-radius: 6px;
         margin-left: 40px;
-        font-family: PingFangSC;
+        font-family: "PingFangSC-Regular","Microsoft YaHei";
         font-size: 24px;
         line-height: 60px;
         text-align: center;
@@ -313,6 +315,7 @@ export default {
       height: 60px;
       font-size: 21px;
       color: #333333;
+      outline: none;
       border-radius: 6px;
       border: solid 1px #d3d3d3;
       background-color: #f3f3f3;
@@ -356,7 +359,7 @@ export default {
         background-color: #ace028;
     }
     .forgetpassword-box-short1,.forgetpassword-box-short2,.forgetpassword-box-simple{
-        font-family: PingFangSC;
+        font-family: "PingFangSC-Regular","Microsoft YaHei";
         font-size: 16px;
         margin-left: 8px;
     }
@@ -383,7 +386,7 @@ export default {
     .forgetpassword-box-diff>p{
         float: left;
         margin: 9px 0 0 12px; 
-        font-family: PingFangSC;
+        font-family: "PingFangSC-Regular","Microsoft YaHei";
         font-size: 16px;
         color: #ff4343;
     }
@@ -395,13 +398,13 @@ export default {
         text-align: center;
         line-height: 60px;
         cursor: pointer;
-        font-family: PingFangSC;
+        font-family: "PingFangSC-Regular","Microsoft YaHei";
         font-size: 24px;
         color: #999999;
         margin-bottom: 30px;
     }
     .forgetpassword-box-jump{
-        font-family: PingFangSC;
+        font-family: "PingFangSC-Regular","Microsoft YaHei";
         font-size: 20px;
         color: #333333;
         cursor: pointer;

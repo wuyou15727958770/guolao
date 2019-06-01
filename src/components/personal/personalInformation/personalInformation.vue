@@ -81,7 +81,7 @@ export default {
     
   },
   mounted(){
-    this.$http.get('/api/usercenter',{params:{
+    this.$http.get(this.GLOBAL.base_url+'/usercenter',{params:{
       user_id:this.$cookie.getCookie('u_id')
       }
     }).then(res=>{
@@ -108,7 +108,7 @@ export default {
           }else if(this.fixphone == ''){
               return this.fixphoneTip='请填写固定电话';
           }else{
-            this.$http.post('/api/usercenter/changinfo',{
+            this.$http.post(this.GLOBAL.base_url+'/usercenter/changinfo',{
             user_id:this.$cookie.getCookie('u_id'),
             name:this.nickname,
             email:this.mail,
@@ -131,21 +131,13 @@ export default {
 </script>
 
 <style>
-    @font-face {
-      font-family: 'informationfont'; 
-      src: url('/static/PingFang/PingFangSC-Thin.ttf');
-    }
-    @font-face {
-      font-family: 'personalfont'; 
-      src: url('/static/PingFang/PingFangSC-Regular.ttf');
-    }
     .personalInformation-container-box{
         width: 800px;
         float: left;
         margin: 64px 0 0 50px;
     }
     .personalInformation-container-box-top{
-      font-family: informationfont;
+      font-family: "PingFangSC-Thin","Microsoft YaHei";
       font-size: 28px;
       font-weight: 100;
       color: #999999;
@@ -157,14 +149,14 @@ export default {
       margin-bottom: 141px;
     }
     .personalInformation-container-box-detail>div>span{
-      font-family: personalfont;
+      font-family: "PingFangSC-Regular","Microsoft YaHei";
       font-size: 18px;
       color: #333333;
     }
     .personalInformation-container-box-detail>div>input{
       width: 288px;
       height: 25px;
-      font-family: informationfont;
+      font-family: "PingFangSC-Thin","Microsoft YaHei";
       font-size: 18px;
       outline: none;
       color: #333333;

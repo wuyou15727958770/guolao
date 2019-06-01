@@ -88,11 +88,13 @@ export default {
           }else if(this.loginData.password == ''){
               return this.loginData.passwordTip='请填写密码';
           }else{
-              this.$http.post('/api/login',{
+              this.$http.post(this.GLOBAL.base_url+'/login',{
                   phone:this.loginData.phone,
                   password:this.loginData.password,
                   type:this.type
-              }).then(res=>{
+              },{
+                            emulateJSON:true
+                        }).then(res=>{
                   if(res.data.code == "1"){
                       if(this.checked == true){
                         this.$cookie.setCookie("username",this.loginData.phone,7);
@@ -155,7 +157,7 @@ export default {
       width: 56px;
       height: 52px;
       float: left;
-      font-family: PingFangSC;
+      font-family: "PingFangSC-Medium","Microsoft Yahei";
       font-size: 28px;
       font-weight: 500;
       color: #111111;
@@ -182,7 +184,7 @@ export default {
       margin:17px 12px 0 24px;
   }
   .input-box>p{
-      font-family: PingFangSC;
+      font-family: "PingFangSC-Regular","Microsoft Yahei";
       font-size: 24px;
       color: #111111;
       margin-top: 13px;
@@ -192,6 +194,7 @@ export default {
       height: 60px;
       font-size: 24px;
       color: #333333;
+      outline: none;
       border-radius: 6px;
       border: solid 1px #d3d3d3;
       background-color: #f3f3f3;
@@ -216,7 +219,7 @@ export default {
         text-align: center;
         line-height: 60px;
         cursor: pointer;
-        font-family: PingFangSC;
+        font-family: "PingFangSC-Regular","Microsoft Yahei";
         font-size: 24px;
         color: #999999;
         margin-bottom: 30px;
@@ -231,15 +234,16 @@ export default {
         float: left;
     }
     .auto{
-        font-family: PingFangSC;
+        font-family: "PingFangSC-Regular","Microsoft Yahei";
         font-size: 20px;
         color: #333333;
         margin-left: 12px;
     }
     .forget{
-        font-family: PingFangSC;
+        font-family: "PingFangSC-Regular","Microsoft Yahei";
         font-size: 20px;
         margin-left: 249px;
         color: #999999;
+        cursor: pointer;
     }
 </style>

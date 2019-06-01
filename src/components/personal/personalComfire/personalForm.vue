@@ -172,6 +172,7 @@
           <span>国内接收人邮编</span>
           <input v-model="receviewpostCode" type="text">
         </div>
+        
         <div class="personalComfire-box-form-type-idimg" v-show="type2">
           <img src="/static/images/star.png" alt="">
           <span>上传护照图片</span>
@@ -215,11 +216,14 @@
           <div class="form-msg">{{passportenglishimgTip}}</div>
         </div>
         
-        <div>
+        <div class="opeartor" v-show="status1">
           <img @click="send" class="personalComfire-box-form-type-submit-img" src="/static/images/submit.png" alt="">
-          <img @click="identquit" src="/static/images/quit.png" alt="">
+          <img @click="identquit1" src="/static/images/quit.png" alt="">
         </div>
-        
+        <div class="opeartor" v-show="status2">
+          <img @click="edit" class="personalComfire-box-form-type-submit-img" src="/static/images/edit.png" alt="">
+          <img @click="identquit2" src="/static/images/quit.png" alt="">
+        </div>
       </div>
     </div>
     <div style="clear:both;"></div>
@@ -256,7 +260,8 @@ export default {
         }],
         value: '0',
         sequence: '1',
-        mapJson:'../../static/json/map.json',
+        // 三级联动
+        mapJson:'../../../static/json/map.json',
         province:'',
         sheng: '',
         shi: '',
@@ -268,6 +273,7 @@ export default {
         a:'',
         b:'',
         c:'',
+        // 不同表单数据不同显示隐藏
         type1:true,
         type2:false,
         type3:false,
@@ -284,7 +290,7 @@ export default {
         idimg_ming3:'',
         idimg_ming4:'',
         idimg_ming5:'',
-        // 表单
+        // 表单数据
         chineseName:'',
         chineseNameTip:'',
         englishName:'',
@@ -311,8 +317,10 @@ export default {
         receviewAddress:'',
         receviewpostCode:'',
         passportimgTip:'',
-        passportenglishimgTip:''
-  
+        passportenglishimgTip:'',
+        // 根据状态显示不同的操作
+        status1:true,
+        status2:false
       }
     },
   components: {
@@ -426,8 +434,11 @@ export default {
                     duration:1500
                 })
             },
-    identquit(){
-      this.$router.push('/personal/personalComfire/personalComfire')
+    identquit1(){
+      this.$router.push('/personal/personalComfire')
+    },
+    identquit2(){
+      this.$router.push('/personal/personalComfire')
     },
     // 加载china地点数据，三级
       getCityData:function(){
@@ -533,7 +544,7 @@ export default {
       uploadid1(img){
         let formData=new FormData();
             formData.append('pic',img.file);
-            this.$http.post('/api/authentication/upload_card',formData).then(res=>{
+            this.$http.post(this.GLOBAL.base_url+'/authentication/upload_card',formData).then(res=>{
               if(res.data.code == "1"){
                 this.idimg_ming1 = res.data.data;
                 this.idimg1 = 'http://51guolao.yiqibnb.com'+ res.data.data;
@@ -543,7 +554,7 @@ export default {
       uploadid2(img){
         let formData=new FormData();
             formData.append('pic',img.file);
-            this.$http.post('/api/authentication/upload_card',formData).then(res=>{
+            this.$http.post(this.GLOBAL.base_url+'/authentication/upload_card',formData).then(res=>{
               if(res.data.code == "1"){
                 this.idimg_ming2 = res.data.data;
                 this.idimg2 ='http://51guolao.yiqibnb.com'+ res.data.data;
@@ -553,7 +564,7 @@ export default {
       uploadid3(img){
         let formData=new FormData();
             formData.append('pic',img.file);
-            this.$http.post('/api/authentication/upload_card',formData).then(res=>{
+            this.$http.post(this.GLOBAL.base_url+'/authentication/upload_card',formData).then(res=>{
               if(res.data.code == "1"){
                 this.idimg_ming3 = res.data.data;
                 this.idimg3 = 'http://51guolao.yiqibnb.com'+ res.data.data;
@@ -563,7 +574,7 @@ export default {
       uploadid4(img){
         let formData=new FormData();
             formData.append('pic',img.file);
-            this.$http.post('/api/authentication/upload_card',formData).then(res=>{
+            this.$http.post(this.GLOBAL.base_url+'/authentication/upload_card',formData).then(res=>{
               if(res.data.code == "1"){
                 this.idimg_ming4 = res.data.data;
                 this.idimg4 = 'http://51guolao.yiqibnb.com'+ res.data.data;
@@ -573,7 +584,7 @@ export default {
       uploadid5(img){
         let formData=new FormData();
             formData.append('pic',img.file);
-            this.$http.post('/api/authentication/upload_card',formData).then(res=>{
+            this.$http.post(this.GLOBAL.base_url+'/authentication/upload_card',formData).then(res=>{
               if(res.data.code == "1"){
                 this.idimg_ming5 = res.data.data;
                 this.idimg5 = 'http://51guolao.yiqibnb.com'+ res.data.data;
@@ -581,6 +592,7 @@ export default {
             });
       },
       send(){
+        // 判断当联系地址选择省的时候 市和区是否默认的第一个
         if(this.b == ''){
           var shi = this.shi;
         }else{
@@ -609,7 +621,7 @@ export default {
             }else if(this.idimg2 == ''){
               this.idimgTip = "请上传身份证反面照片"
             }else{
-              this.$http.post('/api/authentication/addauth',{
+              this.$http.post(this.GLOBAL.base_url+'/authentication/addauth',{
                 type:this.value,
                 user_id:this.$cookie.getCookie('u_id'),
                 chinese_name:this.chineseName,
@@ -628,7 +640,7 @@ export default {
               }).then(res=>{
                 if(res.data.code=="1"){
                   this.tip('success',res.data.msg);
-                  this.$router.push('/personal/personalComfire/personalComfire');
+                  this.$router.push('/personal/personalComfire');
                 }
               })
             }
@@ -655,7 +667,7 @@ export default {
             }else if(this.idimg5 == ''){
               this.passportenglishimgTip = "请上传护照英文翻译照片"
             }else{
-              this.$http.post('/api/authentication/addauth',{
+              this.$http.post(this.GLOBAL.base_url+'/authentication/addauth',{
                 type:this.value,
                 user_id:this.$cookie.getCookie('u_id'),
                 chinese_name:this.chineseName,
@@ -677,7 +689,7 @@ export default {
               }).then(res=>{
                 if(res.data.code=="1"){
                   this.tip('success',res.data.msg);
-                  this.$router.push('/personal/personalComfire/personalComfire');
+                  this.$router.push('/personal/personalComfire');
                 }
               })
             }
@@ -700,7 +712,7 @@ export default {
             }else if(this.idimg5 == ''){
               this.passportenglishimgTip = "请上传护照英文翻译照片"
             }else{
-              this.$http.post('/api/authentication/addauth',{
+              this.$http.post(this.GLOBAL.base_url+'/authentication/addauth',{
                 type:this.value,
                 user_id:this.$cookie.getCookie('u_id'),
                 chinese_name:this.chineseName,
@@ -720,7 +732,7 @@ export default {
               }).then(res=>{
                 if(res.data.code=="1"){
                   this.tip('success',res.data.msg);
-                  this.$router.push('/personal/personalComfire/personalComfire');
+                  this.$router.push('/personal/personalComfire');
                 }
               })
             }
@@ -747,7 +759,7 @@ export default {
             }else if(this.idimg5 == ''){
               this.passportenglishimgTip = "请上传护照英文翻译照片"
             }else{
-              this.$http.post('/api/authentication/addauth',{
+              this.$http.post(this.GLOBAL.base_url+'/authentication/addauth',{
                 type:this.value,
                 user_id:this.$cookie.getCookie('u_id'),
                 chinese_name:this.chineseName,
@@ -769,7 +781,296 @@ export default {
               }).then(res=>{
                 if(res.data.code=="1"){
                   this.tip('success',res.data.msg);
-                  this.$router.push('/personal/personalComfire/personalComfire');
+                  this.$router.push('/personal/personalComfire');
+                }
+              })
+            }
+        }
+      },
+      getData(){
+        this.$http.get(this.GLOBAL.base_url+'/authentication/editauth',{params:{
+          id:this.$route.query.id
+        }}).then(res=>{
+          if(res.data.code == "1"){
+            this.value = String(res.data.data.type);
+            this.chineseName = res.data.data.chinese_name;
+            this.englishName = res.data.data.english_name;
+            this.nation = res.data.data.nationality;
+            this.sequence = String(res.data.data.sex);
+            this.mobile=res.data.data.mobile
+            if(this.value == "0"){
+              this.type1 = true;
+              this.type2 = false;
+              this.type3 = false;
+              this.type4 = true;
+              this.idNum=res.data.data.car_num;
+              this.idAddress=res.data.data.card_address;
+              this.sheng=res.data.data.contact_address_pro;
+              this.a = res.data.data.contact_address_pro;
+              this.shi=res.data.data.contact_address_city;
+              this.qu=res.data.data.contact_address_area;
+              this.detailAddress=res.data.data.contact_detail;
+              this.idimg_ming1 = res.data.data.idcard_img;
+              this.idimg_ming2 = res.data.data.idcard_img_reverse;
+              this.idimg1= 'http://51guolao.yiqibnb.com'+ res.data.data.idcard_img;
+              this.idimg2= 'http://51guolao.yiqibnb.com'+ res.data.data.idcard_img_reverse;
+            }else if(this.value == "1"){
+              this.type1 = false;
+              this.type2 = true;
+              this.type3 = true;
+              this.type4 = false;
+              this.passportNum= res.data.data.car_num;
+              this.linkaddress= res.data.data.contact_address;
+              this.passportchinaAddress= res.data.data.idcard_address;
+              this.passportenglishAddress= res.data.data.english_address;
+              this.idimg_ming3 = res.data.data.idcard_img;
+              this.idimg_ming4 = res.data.data.idcard_img_reverse;
+              this.idimg_ming5 = res.data.data.english_img;
+              this.idimg3= 'http://51guolao.yiqibnb.com'+ res.data.data.idcard_img;
+              this.idimg4= 'http://51guolao.yiqibnb.com'+ res.data.data.idcard_img_reverse;
+              this.idimg5= 'http://51guolao.yiqibnb.com'+ res.data.data.english_img;
+              this.receviewName= res.data.data.resive_name;
+              this.receviewPhone= res.data.data.resive_mobile;
+              this.receviewAddress= res.data.data.resive_address;
+              this.receviewpostCode= res.data.data.resive_pccode;
+            }else if(this.value == "2"){
+              this.type1 = false;
+              this.type2 = true;
+              this.type3 = false;
+              this.type4 = false;
+              this.passportNum= res.data.data.car_num;
+              this.linkaddress= res.data.data.contact_address;
+              this.passportchinaAddress= res.data.data.idcard_address;
+              this.idimg_ming3 = res.data.data.idcard_img;
+              this.idimg_ming4 = res.data.data.idcard_img_reverse;
+              this.idimg_ming5 = res.data.data.english_img;
+              this.idimg3= 'http://51guolao.yiqibnb.com'+res.data.data.idcard_img;
+              this.idimg4= 'http://51guolao.yiqibnb.com'+res.data.data.idcard_img_reverse;
+              this.idimg5= 'http://51guolao.yiqibnb.com'+res.data.data.english_img;
+              this.receviewName= res.data.data.resive_name;
+              this.receviewPhone= res.data.data.resive_mobile;
+              this.receviewAddress= res.data.data.resive_address;
+              this.receviewpostCode= res.data.data.resive_pccode;
+            }else if(this.value == "3"){
+              this.type1 = false;
+              this.type2 = true;
+              this.type3 = true;
+              this.type4 = false;
+              this.passportNum=res.data.data.car_num;
+              this.linkaddress=res.data.data.contact_address;
+              this.passportchinaAddress=res.data.data.idcard_address;
+              this.passportenglishAddress=res.data.data.english_address;
+              this.idimg_ming3 = res.data.data.idcard_img;
+              this.idimg_ming4 = res.data.data.idcard_img_reverse;
+              this.idimg_ming5 = res.data.data.english_img;
+              this.idimg3= 'http://51guolao.yiqibnb.com'+res.data.data.idcard_img;
+              this.idimg4= 'http://51guolao.yiqibnb.com'+res.data.data.idcard_img_reverse;
+              this.idimg5= 'http://51guolao.yiqibnb.com'+res.data.data.english_img;
+              this.receviewName=res.data.data.resive_name;
+              this.receviewPhone=res.data.data.resive_mobile;
+              this.receviewAddress=res.data.data.resive_address;
+              this.receviewpostCode=res.data.data.resive_pccode;
+            }
+            if(res.data.data.status == 1 || res.data.data.status == 3){
+              this.status1 = false;
+              this.status2 = true;
+            }else{
+              this.status1 = false;
+              this.status2 = false;
+            }
+          }
+        })
+      },
+      edit(){
+        if(this.b == ''){
+          var shi = this.shi;
+        }else{
+           var shi = this.b;
+        }
+        if(this.c == ''){
+          var qu = this.qu;
+        }else{
+           var qu = this.c;
+        }
+        if(this.value == "0"){
+            if(this.chineseName == ''){
+              this.chineseNameTip = "请输入中文姓名"
+            }else if(this.nation==''){
+              this.nationTip = "请输入国籍"
+            }else if(this.mobile==''){
+              this.mobileTip = "请输入手机号码"
+            }else if(this.a==''){
+              this.detailAddressTip = "请选择联系地址城市"
+            }else if(this.detailAddress ==''){
+              this.detailAddressTip = "请输入详细联系地址"
+            }else if(this.idNum==''){
+              this.idNumTip = "请输入身份证号码"
+            }else if(this.idimg1 == ''){
+              this.idimgTip = "请上传身份证正面照片"
+            }else if(this.idimg2 == ''){
+              this.idimgTip = "请上传身份证反面照片"
+            }else{
+              this.$http.post(this.GLOBAL.base_url+'/authentication/updateauth',{
+                id:this.$route.query.id,
+                type:this.value,
+                chinese_name:this.chineseName,
+                nationality:this.nation,
+                sex:this.sequence,
+                car_num:this.idNum,
+                mobile:this.mobile,
+                card_address:this.idAddress,
+                contact_address:"中国",
+                contact_address_pro:this.a,
+                contact_address_city:shi,
+                contact_address_area:qu,
+                contact_detail:this.detailAddress,
+                idcard_img:this.idimg_ming1,
+                idcard_img_reverse:this.idimg_ming2
+              }).then(res=>{
+                if(res.data.code=="1"){
+                  this.tip('success',res.data.msg);
+                  this.$router.push('/personal/personalComfire');
+                }
+              })
+            }
+        }
+        if(this.value == "1"){
+            if(this.chineseName == ''){
+              this.chineseNameTip = "请输入中文姓名"
+            }else if(this.englishName == null){
+              this.englishNameTip = "请输入英文姓名"
+            }else if(this.nation==''){
+              this.nationTip = "请输入国籍"
+            }else if(this.mobile==''){
+              this.mobileTip = "请输入手机号码"
+            }else if(this.passportNum==''){
+              this.passportNumTip = "请输入护照号码"
+            }else if(this.passportchinaAddress==''){
+              this.passportchinaAddressTip = "请输入护照地址中文"
+            }else if(this.passportenglishAddress==''){
+              this.passportenglishAddressTip = "请输入护照地址英文"
+            }else if(this.idimg3 == ''){
+              this.passportimgTip = "请上传护照正面照片"
+            }else if(this.idimg4 == ''){
+              this.passportimgTip = "请上传护照反面照片"
+            }else if(this.idimg5 == ''){
+              this.passportenglishimgTip = "请上传护照英文翻译照片"
+            }else{
+              this.$http.post(this.GLOBAL.base_url+'/authentication/updateauth',{
+                id:this.$route.query.id,
+                type:this.value,
+                chinese_name:this.chineseName,
+                english_name:this.englishName,
+                nationality:this.nation,
+                sex:this.sequence,
+                car_num:this.passportNum,
+                mobile:this.mobile,
+                contact_address:this.linkaddress,
+                idcard_address:this.passportchinaAddress,
+                english_address:this.passportenglishAddress,
+                idcard_img:this.idimg_ming3,
+                idcard_img_reverse:this.idimg_ming4,
+                english_img:this.idimg_ming5,
+                resive_name:this.receviewName,
+                resive_mobile:this.receviewPhone,
+                resive_address:this.receviewAddress,
+                resive_pccode:this.receviewpostCode
+              }).then(res=>{
+                if(res.data.code=="1"){
+                  this.tip('success',res.data.msg);
+                  this.$router.push('/personal/personalComfire');
+                }
+              })
+            }
+        }
+        if(this.value == "2"){
+            if(this.chineseName == ''){
+              this.chineseNameTip = "请输入中文姓名"
+            }else if(this.nation==''){
+              this.nationTip = "请输入国籍"
+            }else if(this.mobile==''){
+              this.mobileTip = "请输入手机号码"
+            }else if(this.passportNum==''){
+              this.passportNumTip = "请输入护照号码"
+            }else if(this.passportchinaAddress==''){
+              this.passportchinaAddressTip = "请输入护照地址中文"
+            }else if(this.idimg3 == ''){
+              this.passportimgTip = "请上传护照正面照片"
+            }else if(this.idimg4 == ''){
+              this.passportimgTip = "请上传护照反面照片"
+            }else if(this.idimg5 == ''){
+              this.passportenglishimgTip = "请上传护照英文翻译照片"
+            }else{
+              this.$http.post(this.GLOBAL.base_url+'/authentication/updateauth',{
+                id:this.$route.query.id,
+                type:this.value,
+                chinese_name:this.chineseName,
+                nationality:this.nation,
+                sex:this.sequence,
+                car_num:this.passportNum,
+                mobile:this.mobile,
+                contact_address:this.linkaddress,
+                idcard_address:this.passportchinaAddress,
+                idcard_img:this.idimg_ming3,
+                idcard_img_reverse:this.idimg_ming4,
+                english_img:this.idimg_ming5,
+                resive_name:this.receviewName,
+                resive_mobile:this.receviewPhone,
+                resive_address:this.receviewAddress,
+                resive_pccode:this.receviewpostCode
+              }).then(res=>{
+                if(res.data.code=="1"){
+                  this.tip('success',res.data.msg);
+                  this.$router.push('/personal/personalComfire');
+                }
+              })
+            }
+        }
+        if(this.value == "3"){
+            if(this.chineseName == ''){
+              this.chineseNameTip = "请输入中文姓名"
+            }else if(this.englishName == null){
+              this.englishNameTip = "请输入英文姓名"
+            }else if(this.nation==''){
+              this.nationTip = "请输入国籍"
+            }else if(this.mobile==''){
+              this.mobileTip = "请输入手机号码"
+            }else if(this.passportNum==''){
+              this.passportNumTip = "请输入护照号码"
+            }else if(this.passportchinaAddress==''){
+              this.passportchinaAddressTip = "请输入护照地址中文"
+            }else if(this.passportenglishAddress==''){
+              this.passportenglishAddressTip = "请输入护照地址英文"
+            }else if(this.idimg3 == ''){
+              this.passportimgTip = "请上传护照正面照片"
+            }else if(this.idimg4 == ''){
+              this.passportimgTip = "请上传护照反面照片"
+            }else if(this.idimg5 == ''){
+              this.passportenglishimgTip = "请上传护照英文翻译照片"
+            }else{
+              this.$http.post(this.GLOBAL.base_url+'/authentication/updateauth',{
+                id:this.$route.query.id,
+                type:this.value,
+                chinese_name:this.chineseName,
+                english_name:this.englishName,
+                nationality:this.nation,
+                sex:this.sequence,
+                car_num:this.passportNum,
+                mobile:this.mobile,
+                contact_address:this.linkaddress,
+                idcard_address:this.passportchinaAddress,
+                english_address:this.passportenglishAddress,
+                idcard_img:this.idimg_ming3,
+                idcard_img_reverse:this.idimg_ming4,
+                english_img:this.idimg_ming5,
+                resive_name:this.receviewName,
+                resive_mobile:this.receviewPhone,
+                resive_address:this.receviewAddress,
+                resive_pccode:this.receviewpostCode
+              }).then(res=>{
+                if(res.data.code=="1"){
+                  this.tip('success',res.data.msg);
+                  this.$router.push('/personal/personalComfire');
                 }
               })
             }
@@ -778,24 +1079,17 @@ export default {
   },
   created:function(){
       this.getCityData()
+    },
+    mounted:function(){
+      if(this.$route.query.id){
+        this.getData();
+      }
     }
 }
 
 </script>
 
 <style scoped>
-  @font-face {
-    font-family: 'personalcomfirefont'; 
-    src: url('/static/PingFang/PingFangSC-Medium.ttf');
-  }
-  @font-face {
-    font-family: 'namefont'; 
-    src: url('/static/PingFang/PingFangSC-Thin.ttf');
-  }
-  @font-face {
-    font-family: 'formfont'; 
-    src: url('/static/PingFang/PingFangSC-Regular.ttf');
-  }
   .personalComfire-box-form{
     width: 800px;
     float: left;
@@ -819,7 +1113,7 @@ export default {
     font-size: 14px;
     padding-left: 15px;
     outline: none;
-    font-family: formfont;
+    font-family: "PingFangSC-Regular","Microsoft YaHei";
     border-radius: 4px;
     border: solid 1px #d6d6d6;
   }
@@ -832,7 +1126,7 @@ export default {
     vertical-align: middle;
   }
   #personalComfire-box-form-type>span{
-    font-family: formfont;
+    font-family: "PingFangSC-Regular","Microsoft YaHei";
     margin-right: 16px;
     font-size: 18px;
     vertical-align: middle;
@@ -853,7 +1147,7 @@ export default {
   .personalComfire-box-form-name>span,.personalComfire-box-form-nationality>span,.personalComfire-box-form-sex>span,
   .personalComfire-box-form-linkaddress>span,.personalComfire-box-form-type-number>span,
   .personalComfire-box-form-mobile>span,.personalComfire-box-form-type-passport>span{
-    font-family: formfont;
+    font-family: "PingFangSC-Regular","Microsoft YaHei";
     font-size: 18px;
     vertical-align: middle;
     color: #333333;
@@ -866,14 +1160,14 @@ export default {
     vertical-align: middle;
   }
   .personalComfire-box-form-type-passport-address>span{
-    font-family: formfont;
+    font-family: "PingFangSC-Regular","Microsoft YaHei";
     font-size: 18px;
     vertical-align: middle;
     color: #333333;
     margin-right: 12px;
   }
   .personalComfire-box-form-type-receive>span{
-    font-family: formfont;
+    font-family: "PingFangSC-Regular","Microsoft YaHei";
     font-size: 18px;
     vertical-align: middle;
     color: #333333;
@@ -904,14 +1198,14 @@ export default {
     margin-bottom: 40px;
   }
   #personalComfire-box-form-type-idAddress>span{
-    font-family: formfont;
+    font-family: "PingFangSC-Regular","Microsoft YaHei";
     font-size: 18px;
     vertical-align: middle;
     color: #333333;
     margin: 0 16px 0 38px;
   }
   .personalComfire-box-form-type-idimg>span{
-    font-family: formfont;
+    font-family: "PingFangSC-Regular","Microsoft YaHei";
     font-size: 18px;
     vertical-align: middle;
     color: #333333;
@@ -930,6 +1224,12 @@ export default {
   }
   .personalComfire-box-form-type-submit-img{
     margin: 0 36px  0 86px;
+  }
+  .opeartor{
+    margin-bottom: 100px;
+  }
+  .opeartor>img{
+    cursor: pointer;
   }
 </style>
 <style>

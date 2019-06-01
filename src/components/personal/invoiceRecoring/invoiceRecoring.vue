@@ -203,22 +203,6 @@ export default {
 </script>
 
 <style>
-@font-face {
-    font-family: 'invoicefont'; 
-    src: url('/static/PingFang/PingFangSC-Medium.ttf');
-  }
-  @font-face {
-    font-family: 'invoicefont1'; 
-    src: url('/static/PingFang/PingFangSC-Thin.ttf');
-  }
-   @font-face {
-    font-family: 'invoicefont2'; 
-    src: url('/static/PingFang/PingFangSC-Regular.ttf');
-  }
-  @font-face {
-    font-family: 'invoicefont3'; 
-    src: url('/static/PingFang/PingFangSC-Light.ttf');
-  }
 .invoiceRecoring-box{
     width: 800px;
     float: left;
@@ -234,7 +218,7 @@ export default {
     border-bottom: 1px solid #d8d8d8;
   }
   .invoiceRecoring-box-wrap-top>span{
-    font-family: invoicefont;
+    font-family: "PingFangSC-Medium","Microsoft YaHei";
     font-size: 18px;
     font-weight: 500;
     color: #333333;
@@ -264,7 +248,7 @@ export default {
   }
   .invoiceRecoring-box-wrap-middle>span{
       float: left;
-      font-family: invoicefont1;
+      font-family: "PingFangSC-Thin","Microsoft YaHei";
       font-size: 18px;
       font-weight: 100;
       color: #333333;
@@ -296,7 +280,7 @@ export default {
       font-size: 28px;
       font-weight: 100;
       color: #999999;
-      font-family: invoicefont1;
+      font-family: "PingFangSC-Thin","Microsoft YaHei";
   }
   .invoiceRecoring-box-form-wrap{
       width: 770px;
@@ -311,7 +295,7 @@ export default {
       height: 40px;
       border-radius: 4px;
       border: solid 1px #d6d6d6;
-      font-family: invoicefont2;
+      font-family: "PingFangSC-Regular","Microsoft YaHei";
       font-size: 18px;
       color: #999999;
       outline: none;
@@ -320,7 +304,7 @@ export default {
   }
   .invoiceRecoring-box-form-wrap>div>span{
       font-size: 18px;
-      font-family: invoicefont2;
+      font-family: "PingFangSC-Regular","Microsoft YaHei";
       color: #333333;
       vertical-align: middle;
   }
@@ -340,7 +324,7 @@ export default {
       vertical-align: middle;
   }
   #invoiceRecoring-box-form-wrap-fit{
-      font-family: invoicefont3;
+      font-family: "PingFangSC-Light","Microsoft YaHei";
       font-size: 12px;
       font-weight: 300;
       color: #de061c;

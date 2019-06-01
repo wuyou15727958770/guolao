@@ -11,19 +11,20 @@
           <span>审核状态</span>
           <span>操作</span>
         </div>
+
         <div class="personalComfire-box-wrap-middle">
           <div v-for="(v,k) in dataList">
             <div class="personalComfire-box-wrap-middle-div1">{{v.chinese_name}}</div>
             <div class="personalComfire-box-wrap-middle-div2">{{types[v.type]}}</div>
             <div class="personalComfire-box-wrap-middle-div3">{{v.sex ==  1 ?"男":"女"}}</div>
             <div class="personalComfire-box-wrap-middle-div4">{{v.mobile}}</div>
-            <div class="personalComfire-box-wrap-middle-div5">{{v.contact_address+v.contact_address_pro+v.contact_address_city+v.contact_address_area}}</div>
+            <div class="personalComfire-box-wrap-middle-div5">{{v.contact_address_pro+v.contact_address_city+v.contact_address_area+v.contact_address}}</div>
             <div class="personalComfire-box-wrap-middle-div6">{{status[v.status]}}</div>
             <div class="personalComfire-box-wrap-middle-div7"  v-if="v.status == '1' || v.status == '3'">
-              <span>修改</span><span @click="delauther(v.id)" >/删除</span>
+              <span @click="look(v.id)">修改</span><span @click="delauther(v.id)" >/删除</span>
             </div>
              <div class="personalComfire-box-wrap-middle-div7"  v-if="v.status == '2'">
-              <span>查看</span>
+              <span @click="look(v.id)">查看</span>
             </div>
           </div>
         </div>
@@ -33,8 +34,8 @@
           @current-change="handleCurrentChange"
           :current-page="currentPage1"
           :page-size="pageSize"
-            layout="prev, pager, next"
-            :total="total">
+          layout="prev, pager, next"
+          :total="total">
           </el-pagination>
         </div>
         <div class="personalComfire-box-wrap-img">
@@ -56,7 +57,6 @@ export default {
         total:0,
         currentPage1: 1,
         pageSize: 5,
-        pageNum:1,
         id:'',
         dataList:[],
         types:{
@@ -69,19 +69,19 @@ export default {
           '1': '未审核',
           '2': '已审核',
           '3': '驳回'
-        },
+        }
       }
     },
   components: {
   },
   methods:{
     identapply(){
-     this.$router.push('/personal/personalComfire/personalForm')
+     this.$router.push('/personal/personalForm')
     },
     getList(){
-      this.$http.get("/api/authentication",{params:{
+      this.$http.get(this.GLOBAL.base_url+"/authentication",{params:{
         user_id:this.$cookie.getCookie('u_id'),
-        page:this.pageNum
+        page:this.currentPage1
       }}).then(res=>{
         if(res.data.code == "1"){
           this.total = res.data.others;
@@ -95,51 +95,55 @@ export default {
             },
             
         handleCurrentChange(val) {
-            this.pageNum = val;
+            this.currentPage1 = val;
             this.getList();
         },
         delauther(e){
-          this.$http.get("/api/authentication/delauth",{params:{
+          this.$http.get(this.GLOBAL.base_url+"/authentication/delauth",{params:{
             id:e
           }}).then(res=>{
             if(res.data.code == "1"){
-              this.$router.go(0)
+              if(this.dataList.length>1){
+                this.pageNum = Number(localStorage.getItem('pagination')) || 1;
+              }else{
+                this.pageNum = Number(localStorage.getItem('pagination'))-1 || 1;
+              } 
+              this.pageChange(this.pageNum);
+              this.getList();
+              this.$router.go(0);
+  
             }
           })
         },
         pageChange (pageNum) {
           this.currentPage1 = pageNum;
-      }
+      },
+      look(id){
+        this.$router.push({
+          path: '/personal/personalForm',
+          query:{
+            id:id
+          }
+        })
+      },
   },
+  
     created() {
-        this.pageNum = Number(localStorage.getItem('pagination')) || 1;
-        this.pageChange(this.pageNum);
+        this.currentPage1 = Number(localStorage.getItem('pagination')) || 1;
+        this.pageChange(this.currentPage1);
         this.getList();
       },
       beforeUpdate () {
-          localStorage.setItem('pagination', this.pageNum);
+          localStorage.setItem('pagination', this.currentPage1);
       },
       beforeDestroy () {
           localStorage.setItem('pagination', '1');
       }
-
 }
 
 </script>
 
 <style scoped>
-  @font-face {
-    font-family: 'personalcomfirefont'; 
-    src: url('/static/PingFang/PingFangSC-Medium.ttf');
-  }
-  @font-face {
-    font-family: 'namefont'; 
-    src: url('/static/PingFang/PingFangSC-Thin.ttf');
-  }
-  @font-face {
-    font-family: 'formfont'; 
-    src: url('/static/PingFang/PingFangSC-Regular.ttf');
-  }
   .personalComfire-box{
     width: 900px;
     float: left;
@@ -156,7 +160,7 @@ export default {
     border-bottom: 1px solid #d8d8d8;
   }
   .personalComfire-box-wrap-top>span{
-    font-family: personalcomfirefont;
+    font-family: "PingFangSC-Medium","Microsoft YaHei";
     font-size: 18px;
     font-weight: 500;
     color: #333333;
@@ -178,7 +182,7 @@ export default {
     margin-bottom: 24px;
   }
   .personalComfire-box-wrap-middle>div>div{
-    font-family: namefont;
+    font-family: "PingFangSC-Thin","Microsoft YaHei";
     font-size: 18px;
     font-weight: 100;
     color: #333333;
@@ -214,6 +218,9 @@ export default {
     text-align: center;
     left: 660px;
   }
+  .personalComfire-box-wrap-middle-div7>span{
+    cursor: pointer;
+  }
   .personalComfire-box-wrap-block{
     width: 700px;
     text-align: center;
@@ -222,6 +229,7 @@ export default {
   .personalComfire-box-wrap-img{
     width: 136px;
     margin: 0 auto;
+    cursor: pointer;
   }
 </style>
 

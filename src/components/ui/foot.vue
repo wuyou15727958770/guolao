@@ -101,7 +101,7 @@ export default {
       float: left;
   }
   .introduct>p{
-      font-family: PingFangSC;
+      font-family: "PingFangSC-Medium","Microsoft YaHei";
       font-size: 12px;
       color: #555555;
       margin-top:10px;
@@ -115,13 +115,13 @@ export default {
       margin:0 148px;
   }
   .help>p{
-      font-family: PingFangSC;
+      font-family: "PingFangSC-Regular","Microsoft YaHei";
       font-size: 12px;
       color: #555555;
       margin-top:10px;
   }
   .partner>p{
-      font-family: PingFangSC;
+      font-family: "PingFangSC-Regular","Microsoft YaHei";
       font-size: 12px;
       margin-top:10px;
   }
@@ -143,7 +143,7 @@ export default {
       margin-left: 8px;
   }
   .code-p>p{
-      font-family: PingFangSC;
+      font-family: "PingFangSC-Regular","Microsoft YaHei";
       font-size: 12px;
       margin-top: 8px;
       color: #999999;
@@ -158,7 +158,7 @@ export default {
       border-bottom:1px solid #d8d8d8;
   }
   .complaint>span{
-      font-family: PingFangSC;
+      font-family: "PingFangSC-Regular","Microsoft YaHei";
       font-size: 12px;
       color: #8c8c8c;
   }
@@ -169,12 +169,12 @@ export default {
       margin-top: 2px;
   }
   .cult>span{
-      font-family: PingFangSC;
+      font-family: "PingFangSC-Regular","Microsoft YaHei";
         font-size: 12px;
         color: #555555;
   }
   .corp>span{
-    font-family: PingFangSC;
+    font-family: "PingFangSC-Regular","Microsoft YaHei";
         font-size: 12px;
         color: #555555;  
   }

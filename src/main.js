@@ -6,11 +6,16 @@ import Axios from 'axios'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import router from './router'
+import global_ from '../config/global.js'
+
 import {setCookie,getCookie,delCookie} from '@/cookie.js';
 
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 Vue.prototype.$http=Axios
+
+Vue.prototype.GLOBAL = global_;
+
 Vue.prototype.$cookie ={
   setCookie,
   getCookie,

@@ -170,7 +170,7 @@ export default {
           if(this.registerData.telephone == ''){
               this.registerData.telephoneTip = "请输入手机号码"
           }else{
-              this.$http.post('/api/register/sendcode',{
+              this.$http.post(this.GLOBAL.base_url+'/register/sendcode',{
               phone:this.registerData.telephone,
               type:this.type
           }).then(res=>{
@@ -213,7 +213,7 @@ export default {
              this.diffshow = false;
              this.registerData.checkpasswordTip = "请再次输入密码"
          }else{
-             this.$http.post('/api/register',{
+             this.$http.post(this.GLOBAL.base_url+'/register',{
              phone:this.registerData.telephone,
              code:this.registerData.code,
              password:this.registerData.password,
@@ -277,7 +277,7 @@ export default {
       width: 56px;
       height: 52px;
       float: left;
-      font-family: PingFangSC;
+      font-family: "PingFangSC-Regular","Microsoft YaHei";
       font-size: 28px;
       font-weight: 500;
       color: #111111;
@@ -290,6 +290,7 @@ export default {
       width: 436px;
       height: 60px;
       color: #999999;
+      outline: none;
       font-size: 24px;
       border-radius: 6px;
       border: solid 1px #d3d3d3;
@@ -308,6 +309,7 @@ export default {
         width: 230px;
         height: 60px;
         font-size: 24px;
+        outline: none;
         color: #333333;
         border-radius: 6px;
         border: solid 1px #d3d3d3;
@@ -320,7 +322,7 @@ export default {
         height: 60px;
         border-radius: 6px;
         margin-left: 40px;
-        font-family: PingFangSC;
+        font-family: "PingFangSC-Regular","Microsoft YaHei";
         font-size: 24px;
         line-height: 60px;
         text-align: center;
@@ -338,6 +340,7 @@ export default {
       width: 436px;
       height: 60px;
       font-size: 21px;
+      outline: none;
       color: #333333;
       border-radius: 6px;
       border: solid 1px #d3d3d3;
@@ -388,7 +391,7 @@ export default {
         background-color: #ace028;
     }
     .short1,.short2,.simple{
-        font-family: PingFangSC;
+        font-family: "PingFangSC-Regular","Microsoft YaHei";
         font-size: 16px;
         margin-left: 8px;
     }
@@ -417,7 +420,7 @@ export default {
     .diff>p{
         float: left;
         margin: 9px 0 0 12px; 
-        font-family: PingFangSC;
+        font-family: "PingFangSC-Regular","Microsoft YaHei";
         font-size: 16px;
         color: #ff4343;
     }
@@ -428,14 +431,14 @@ export default {
         background-color: #f3f3f3;
         text-align: center;
         line-height: 60px;
-        font-family: PingFangSC;
+        font-family: "PingFangSC-Regular","Microsoft YaHei";
         font-size: 24px;
         color: #999999;
         cursor: pointer;
         margin-bottom: 30px;
     }
     .agree-box{
-        font-family: PingFangSC;
+        font-family: "PingFangSC-Regular","Microsoft YaHei";
         font-size: 16px;
     }
     .span1{

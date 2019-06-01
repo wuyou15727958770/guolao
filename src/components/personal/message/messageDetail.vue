@@ -37,25 +37,13 @@ export default {
 </script>
 
 <style scoped>
-  @font-face {
-      font-family: 'messageDetailfont1'; 
-      src: url('/static/PingFang/PingFangSC-Thin.ttf');
-    }
-    @font-face {
-      font-family: 'messageDetailfont2'; 
-      src: url('/static/PingFang/PingFangSC-Regular.ttf');
-    }
-    @font-face {
-      font-family: 'messageDetailfont3'; 
-      src: url('/static/PingFang/PingFangSC-Semibold.ttf');
-    }
   .messageDetail-box{
         width: 800px;
         float: left;
         margin: 64px 0 0 50px;
     }
     .messageDetail-box-top{
-      font-family: messageDetailfont1;
+      font-family: "PingFangSC-Thin","Microsoft YaHei";
       font-size: 28px;
       font-weight: 100;
       color: #999999;
@@ -67,33 +55,33 @@ export default {
       border-top:1px solid #d8d8d8;
     }
     .messageDetail-box-top-detail-div-p1{
-      font-family: messageDetailfont3;
+      font-family: "PingFangSC-Semibold","Microsoft YaHei";
       font-size: 28px;
       font-weight: 600;
       color: #333333;
       margin-bottom: 10px;
     }
     .messageDetail-box-top-detail-div-p2{
-      font-family: messageDetailfont2;
+      font-family: "PingFangSC-Regular","Microsoft YaHei";
       font-size: 16px;
       color: #333333;
       margin-bottom: 12px;
     }
     .messageDetail-box-top-detail-div-p3{
-      font-family: messageDetailfont2;
+      font-family: "PingFangSC-Regular","Microsoft YaHei";
       font-size: 12px;
       color: #666666;
       margin: 62px 0 10px;
     }
     .messageDetail-box-top-detail-div-p4{
-      font-family: messageDetailfont1;
+      font-family: "PingFangSC-Thin","Microsoft YaHei";
       font-size: 12px;
       font-weight: 100;
       color: #999999;
       margin-bottom: 24px;
     }
     .messageDetail-box-top-detail-div-p5{
-      font-family: messageDetailfont2;
+      font-family: "PingFangSC-Regular","Microsoft YaHei";
       font-size: 12px;
       color: #f96006;
       margin-bottom: 62px;

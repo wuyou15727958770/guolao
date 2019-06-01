@@ -65,25 +65,13 @@ export default {
 </script>
 
 <style scoped>
-    @font-face {
-      font-family: 'messagefont1'; 
-      src: url('/static/PingFang/PingFangSC-Thin.ttf');
-    }
-    @font-face {
-      font-family: 'messagefont2'; 
-      src: url('/static/PingFang/PingFangSC-Regular.ttf');
-    }
-    @font-face {
-      font-family: 'messagefont3'; 
-      src: url('/static/PingFang/PingFangSC-Semibold.ttf');
-    }
   .message-box{
         width: 800px;
         float: left;
         margin: 64px 0 0 50px;
     }
     .message-box-top{
-      font-family: messagefont1;
+      font-family: "PingFangSC-Thin","Microsoft YaHei";
       font-size: 28px;
       font-weight: 100;
       color: #999999;
@@ -101,20 +89,20 @@ export default {
     margin: 0 0 35px 9px;
   }
   .message-box-div>p:nth-of-type(1){
-    font-family: messagefont3;
+    font-family: "PingFangSC-Semibold","Microsoft YaHei";
     font-size: 16px;
     font-weight: 600;
     color: #333333;
     margin-bottom: 10px;
   }
   .message-box-div>p:nth-of-type(2){
-    font-family: messagefont2;
+    font-family: "PingFangSC-Regular","Microsoft YaHei";
     font-size: 16px;
     color: #333333;
     margin-bottom: 10px;
   }
   .message-box-div>p:nth-of-type(3){
-    font-family: messagefont1;
+    font-family: "PingFangSC-Thin","Microsoft YaHei";
     font-size: 12px;
   font-weight: 100;
     color: #999999;
@@ -135,7 +123,7 @@ export default {
         height: 39px;
         font-size: 14px;
         color: #666666;
-        font-family: messagefont2;
+        font-family: "PingFangSC-Regular","Microsoft YaHei";
     }
     .el-tabs__item:hover{
         color:#666666;

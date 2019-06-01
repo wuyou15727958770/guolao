@@ -260,7 +260,7 @@ export default {
       }
   },
   mounted(){
-    this.$http.get('/api/usercenter',{params:{
+    this.$http.get(this.GLOBAL.base_url+'/usercenter',{params:{
       user_id:this.$cookie.getCookie('u_id')
       }
     }).then(res=>{
@@ -290,7 +290,7 @@ export default {
       if(this.mobile == ''){
         this.mobileTip = "请输入手机号码"
       }else{
-        this.$http.post('/api/register/sendcode',{
+        this.$http.post(this.GLOBAL.base_url+'/register/sendcode',{
               phone:this.mobile,
               type:this.mobile_type
           }).then(res=>{
@@ -308,7 +308,7 @@ export default {
       }else if(this.mobilecode == ''){
         this.mobilecodeTip = "请输入验证码"
       }else{
-        this.$http.post('/api/usercenter/changephone',{
+        this.$http.post(this.GLOBAL.base_url+'/usercenter/changephone',{
           phone:this.mobile,
           type:this.mobile_type,
           user_id:this.$cookie.getCookie('u_id'),
@@ -331,7 +331,7 @@ export default {
       if(this.mail == ''){
         this.mailTip = "请输入邮箱"
       }else{
-        this.$http.get('/api/mail/send',{params:{
+        this.$http.get(this.GLOBAL.base_url+'/mail/send',{params:{
               email:this.mail
           }}).then(res=>{
               if(res.data.code == "1"){
@@ -349,7 +349,7 @@ export default {
        }else if(this.mailcode == ''){
          this.mailcodeTip = "请输入邮箱验证码"
        }else{
-         this.$http.post('/api/mail/upemail',{
+         this.$http.post(this.GLOBAL.base_url+'/mail/upemail',{
            email:this.mail,
            code:this.mailcode,
            user_id:this.$cookie.getCookie('u_id')
@@ -382,7 +382,7 @@ export default {
       if(this.changepasswordmobile == ''){
         this.changepasswordmobileTip ="请输入手机号码"
       }else{
-        this.$http.post('/api/register/sendcode',{
+        this.$http.post(this.GLOBAL.base_url+'/register/sendcode',{
               phone:this.changepasswordmobile,
               type:this.changepasswordType
           }).then(res=>{
@@ -404,7 +404,7 @@ export default {
       }else if(this.changecheckpassword == ''){
         this.changecheckpasswordTip = "请再次输入密码"
       }else{
-        this.$http.post('/api/usercenter/changepass',{
+        this.$http.post(this.GLOBAL.base_url+'/usercenter/changepass',{
               phone:this.changepasswordmobile,
               user_id:this.$cookie.getCookie('u_id'),
               code:this.changepasswordmobilecode,
@@ -441,21 +441,13 @@ export default {
 </script>
 
 <style scoped>
-  @font-face {
-      font-family: 'safefont'; 
-      src: url('/static/PingFang/PingFangSC-Thin.ttf');
-    }
-    @font-face {
-      font-family: 'otherfont'; 
-      src: url('/static/PingFang/PingFangSC-Regular.ttf');
-    }
   .safeCenrter-container-box{
     width: 800px;
     float: left;
     margin: 64px 0 300px 50px;
   }
   .safeCenrter-container-box-top{
-      font-family: safefont;
+      font-family: "PingFangSC-Thin","Microsoft YaHei";
       font-size: 28px;
       font-weight: 100;
       color: #999999;
@@ -470,7 +462,7 @@ export default {
       margin: 21px 0 47px 82px;
     }
     .safeCenrter-container-box-detail>div>span{
-      font-family: otherfont;
+      font-family: "PingFangSC-Regular","Microsoft YaHei";
       font-size: 18px;
       margin-right: 28px;
       color: #333333;
@@ -497,7 +489,7 @@ export default {
     }
     #safeCenrter-container-box-changePassword{
       font-weight: 100;
-      margin-left: 240px;
+      margin-left: 255px;
       cursor: pointer;
       color: #fa7d33;
     }
@@ -507,7 +499,7 @@ export default {
         margin: 64px 0 300px 50px;
     }
     .safeCenrter-testphone-box-top,.safeCenrter-testmail-box-top,.safeCenter-changePassword-box-top{
-        font-family: safefont;
+        font-family: "PingFangSC-Thin","Microsoft YaHei";
         font-size: 28px;
         font-weight: 100;
         color: #999999;
@@ -519,19 +511,19 @@ export default {
         margin-bottom: 64px;
     }
     .safeCenrter-testphone-box-detail>div>span{
-      font-family: otherfont;
+      font-family: "PingFangSC-Regular","Microsoft YaHei";
       font-size: 18px;
       color: #333333;
     }
     .safeCenrter-testmail-box-detail>div>span{
-      font-family: otherfont;
+      font-family: "PingFangSC-Regular","Microsoft YaHei";
       font-size: 18px;
       color: #333333;
     }
     .safeCenrter-testphone-box-detail>div>input{
       width: 288px;
       height: 25px;
-      font-family: otherfont;
+      font-family: "PingFangSC-Regular","Microsoft YaHei";
       font-size: 18px;
       outline: none;
       color: #333333;
@@ -543,7 +535,7 @@ export default {
     .safeCenrter-testmail-box-detail>div>input{
       width: 288px;
       height: 25px;
-      font-family: otherfont;
+      font-family: "PingFangSC-Regular","Microsoft YaHei";
       font-size: 18px;
       outline: none;
       color: #333333;
@@ -603,7 +595,7 @@ export default {
       height: 25px;
       border-radius: 4px;
       border: solid 1px #d6d6d6;
-      font-family: otherfont;
+      font-family: "PingFangSC-Regular","Microsoft YaHei";
       font-size: 18px;
       color: #999999;
       padding: 8px 0 7px 12px;
@@ -616,7 +608,7 @@ export default {
       margin-top: 13px;
     }
     .safeCenter-changePassword-box-detail-div1-span1,.safeCenter-changePassword-box-detail-div1-span2{
-       font-family: safefont;
+       font-family: "PingFangSC-Thin","Microsoft YaHei";
         font-size: 18px;
         font-weight: 100;
         cursor: pointer;
@@ -631,7 +623,7 @@ export default {
       height: 25px;
       border-radius: 4px;
       border: solid 1px #d6d6d6;
-      font-family: otherfont;
+      font-family: "PingFangSC-Regular","Microsoft YaHei";
       font-size: 18px;
       color: #999999;
       padding: 8px 0 7px 12px;

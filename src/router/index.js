@@ -71,57 +71,72 @@ let router= new Router({
         },
         // 个人中心
         {
-            path: '/personal/personal',
-            redirect:'/personal/personalInformation/personalInformation',
+            path: '/personal',
+            redirect:'/personal/personalInformation',
             component: () => import('@/components/personal/personal/personal.vue'),
                 children:[
                     {
-                        path:'/personal/personalInformation/personalInformation',
+                        path:'/personal/personalInformation',
                         component:()=>
                             import('@/components/personal/personalInformation/personalInformation.vue')
                     },
                     {
-                        path:'/personal/safeCenter/safeCenter',
+                        path:'/personal/safeCenter',
                         component:()=>
                             import('@/components/personal/safeCenter/safeCenter.vue')
                     },
                     {
-                        path:'/personal/personalComfire/personalComfire',
+                        path:'/personal/personalComfire',
                         component:()=>
                             import('@/components/personal/personalComfire/personalComfireIndex.vue'),
                             children:[
                                 {
-                                    path:'/personal/personalComfire/personalComfire',
+                                    path:'/personal/personalComfire',
+                                    name:'/personal/personalComfire/personalComfire',
                                     component:()=>
                                         import('@/components/personal/personalComfire/personalComfire.vue'),
                                 },{
-                                    path:'/personal/personalComfire/personalForm',
+                                    path:'/personal/personalForm',
+                                    name:'/personal/personalForm',
                                     component:()=>
                                         import('@/components/personal/personalComfire/personalForm.vue')
                                 }
                             ]
                     }
                     ,{
-                        path:'/personal/companyComfire/companyComfire',
+                        path:'/personal/companyComfire',
                         component:()=>
-                            import('@/components/personal/companyComfire/companyComfire.vue')
+                            import('@/components/personal/companyComfire/companyComfireIndex.vue'),
+                            children:[
+                                {
+                                    path:'/personal/companyComfire',
+                                    name:'/personal/companyComfire',
+                                    component:()=>
+                                        import('@/components/personal/companyComfire/companyComfire.vue'),
+                                },{
+                                    path:'/personal/companyForm',
+                                    name:'/personal/companyForm',
+                                    component:()=>
+                                        import('@/components/personal/companyComfire/companyForm.vue')
+                                }
+                            ]
                     },{
-                        path:'/personal/coupon/coupon',
+                        path:'/personal/coupon',
                         component:()=>
                             import('@/components/personal/coupon/coupon.vue')
                     },{
-                        path:'/personal/invoiceRecoring/invoiceRecoring',
+                        path:'/personal/invoiceRecoring',
                         component:()=>
                             import('@/components/personal/invoiceRecoring/invoiceRecoring.vue')
                     },
                     {
-                        path:'/personal/message/message',
+                        path:'/personal/message',
                         component:()=>import('@/components/personal/message/messageIndex.vue'),
                             children:[{
-                                path:'/personal/message/message',
+                                path:'/personal/message',
                                 component:()=>import('@/components/personal/message/message.vue')
                             },{
-                                path:'/personal/message/messageDetail',
+                                path:'/personal/messageDetail',
                                 component:()=>import('@/components/personal/message/messageDetail.vue')
                             }]
                     }

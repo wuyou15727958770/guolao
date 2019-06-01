@@ -2,11 +2,6 @@
   <div class="trade-container">
     <Top></Top>
     <div class="service">
-      <div class="service-mid">
-        <p>商标服务</p>
-        <input type="text" placeholder="请输入商标名称"> 
-        <i class="el-icon-error"/>
-      </div>
       <div class="trade-pic">
         <!-- <div class="trade-des">
           <p>而另外方可五分裤五分裤我</p>
@@ -23,88 +18,88 @@
         </div>
         <div class="trade-goods">
           <div>
-            <img src="/static/images/design.png" alt="">
+            <img src="/static/images/pen.png" alt="">
             <p>商标设计</p>
             <p>288元</p>
           </div>
           <div>
-            <img src="/static/images/design.png" alt="">
-            <p>商标设计</p>
+            <img src="/static/images/trademark.png" alt="">
+            <p>自助商标注册</p>
             <p>288元</p>
           </div>
           <div>
-            <img src="/static/images/design.png" alt="">
-            <p>商标设计</p>
+            <img src="/static/images/tradereg.png" alt="">
+            <p>商标注册</p>
             <p>288元</p>
           </div>
           <div id="search1">
-            <img src="/static/images/design.png" alt="">
-            <p>商标设计</p>
+            <img src="/static/images/tradesearch.png" alt="">
+            <p>商标检索</p>
             <p>288元</p>
           </div>
           <div>
-            <img src="/static/images/design.png" alt="">
-            <p>商标设计</p>
+            <img src="/static/images/tradechange.png" alt="">
+            <p>商标变更</p>
             <p>288元</p>
           </div>
           <div>
-            <img src="/static/images/design.png" alt="">
-            <p>商标设计</p>
+            <img src="/static/images/traderemove.png" alt="">
+            <p>商标转让/移转</p>
             <p>288元</p>
           </div>
           <div>
-            <img src="/static/images/design.png" alt="">
-            <p>商标设计</p>
+            <img src="/static/images/traderej.png" alt="">
+            <p>商标驳回复审</p>
             <p>288元</p>
           </div>
           <div id="search1" >
-            <img src="/static/images/design.png" alt="">
-            <p>商标设计</p>
+            <img src="/static/images/tradeex.png" alt="">
+            <p>商标续展</p>
             <p>288元</p>
           </div>
           <div>
-            <img src="/static/images/design.png" alt="">
-            <p>商标设计</p>
+            <img src="/static/images/tradeag.png" alt="">
+            <p>商标使用许可备案</p>
             <p>288元</p>
           </div>
           <div>
-            <img src="/static/images/design.png" alt="">
-            <p>商标设计</p>
+            <img src="/static/images/tradebu.png" alt="">
+            <p>补发商标注册证</p>
             <p>288元</p>
           </div>
           <div>
-            <img src="/static/images/design.png" alt="">
-            <p>商标设计</p>
+            <img src="/static/images/tradeno.png" alt="">
+            <p>商标异议</p>
             <p>288元</p>
           </div>
           <div id="search1">
-            <img  src="/static/images/design.png" alt="">
-            <p>商标设计</p>
+            <img  src="/static/images/tradeobj.png" alt="">
+            <p>商标异议答辩</p>
             <p>288元</p>
           </div>
           <div>
-            <img src="/static/images/design.png" alt="">
-            <p>商标设计</p>
+            <img src="/static/images/tradere.png" alt="">
+            <p>撤销三年不使用</p>
             <p>288元</p>
           </div>
           <div>
-            <img src="/static/images/design.png" alt="">
-            <p>商标设计</p>
+            <img src="/static/images/tradean.png" alt="">
+            <p>撤销三年不使用答辩</p>
             <p>288元</p>
           </div>
           <div>
-            <img src="/static/images/design.png" alt="">
-            <p>商标设计</p>
+            <img src="/static/images/tradefu.png" alt="">
+            <p>商标无效宣言</p>
             <p>288元</p>
           </div>
           <div id="search1">
-            <img src="/static/images/design.png" alt="">
-            <p>商标设计</p>
+            <img src="/static/images/tradecon.png" alt="">
+            <p>商标无效宣言答辩</p>
             <p>288元</p>
           </div>
           <div>
-            <img src="/static/images/design.png" alt="">
-            <p>商标设计</p>
+            <img src="/static/images/tradeun.png" alt="">
+            <p>商标设计担保</p>
             <p>288元</p>
           </div>
         </div>
@@ -127,39 +122,16 @@ export default {
 </script>
 
 <style scoped>
+  @font-face {
+    font-family: 'tradeFont'; 
+    src: url('/static/PingFang/PingFangSC-Medium.ttf');
+  }
   .service{
     width: 100%;
   }
   .service>div{
     width: 1180px;
     margin: 0 auto;
-  }
-  .service-mid{
-    height: 52px;
-    line-height: 52px;
-    position: relative;
-  }
-  .service-mid>p{
-    float: left;
-    margin: 0 666px  0 100px;
-    font-family: PingFangSC;
-    font-size: 20px;
-    font-weight: 500;
-    color: #111111;
-  }
-  .service-mid>input{
-    width: 234px;
-    height: 20px;
-    border: none;
-    outline: none;
-    border-bottom: 1px solid #888888;
-  }
-  .el-icon-error{
-    width: 12px;
-    height: 12px;
-    position: absolute;
-    top:18px;
-    right: 105px;
   }
   .trade-pic{
     width: 1180px;
@@ -183,11 +155,14 @@ export default {
   }
   .trade-goods>div{
     width: 280px;
-    height: 400px;
+    height: 207px;
     float: left;
     margin: 0 20px 20px 0;
     text-align: center;
     background-color: #ffffff;
+  }
+  .trade-goods>div>img{
+    margin-top: 32px;
   }
   #search1{
     margin-right: 0px;
@@ -195,12 +170,12 @@ export default {
   .trade-goods>div>p:nth-of-type(1){
     font-size: 24px;
     font-weight: 500;
-    font-style: normal;
+    font-family: "PingFangSC-Medium","Microsoft YaHei";
     color: #333333;
-    margin-top: 10px;
+    margin-top: 24px;
   }
   .trade-goods>div>p:nth-of-type(2){
-     font-family: PingFangSC;
+     font-family: "PingFangSC-Medium","Microsoft YaHei";
      font-size: 16px;
      font-weight: 500;
      color: #333333;

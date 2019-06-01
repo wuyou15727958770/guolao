@@ -35,16 +35,16 @@
                 <img class="personal-container-middle-box-collapse-img" src="/static/images/system.png" alt="">
                 <span class="personal-container-middle-box-collapse-span">账户设置</span>
               </template>
-              <router-link class="personal-container-middle-box-collapse-personal" tag="div" to="/personal/personalInformation/personalInformation">个人资料</router-link>
-              <router-link class="personal-container-middle-box-collapse-safe" tag="div" to="/personal/safeCenter/safeCenter">安全中心</router-link>
+              <router-link class="personal-container-middle-box-collapse-personal" tag="div" to="/personal/personalInformation">个人资料</router-link>
+              <router-link class="personal-container-middle-box-collapse-safe" tag="div" to="/personal/safeCenter">安全中心</router-link>
             </el-collapse-item>
             <el-collapse-item>
               <template slot="title">
                 <img class="personal-container-middle-box-collapse-img" src="/static/images/tes.png" alt="">
                 <span class="personal-container-middle-box-collapse-span">认证中心</span>
               </template>
-              <router-link class="personal-container-middle-box-collapse-personal" tag="div" to="/personal/personalComfire/personalComfire">个人认证</router-link>
-              <router-link id="personal-container-middle-box-collapse-safe2" tag="div" to="/personal/companyComfire/companyComfire">企业/国内个体认证</router-link>
+              <router-link class="personal-container-middle-box-collapse-personal" tag="div" to="/personal/personalComfire">个人认证</router-link>
+              <router-link id="personal-container-middle-box-collapse-safe2" tag="div" to="/personal/companyComfire">企业/国内个体认证</router-link>
             </el-collapse-item>
             <el-collapse-item>
               <template slot="title">
@@ -56,19 +56,19 @@
             </el-collapse-item>
             <div class="personal-container-middle-box-collapse-juan">
               <img src="/static/images/juan.png" alt="">
-              <router-link tag="span" to="/personal/coupon/coupon">我的优惠券</router-link>
+              <router-link tag="span" to="/personal/coupon">我的优惠券</router-link>
             </div>
             <el-collapse-item>
               <template slot="title">
                 <img class="personal-container-middle-box-collapse-img" src="/static/images/invoice.png" alt="">
                 <span class="personal-container-middle-box-collapse-span">我的发票</span>
               </template>
-              <router-link class="personal-container-middle-box-collapse-personal" tag="div" to="/personal/invoiceRecoring/invoiceRecoring">开票记录</router-link>
-              <router-link id="personal-container-middle-box-collapse-manage" tag="div" to="/personal/safeCenter/safeCenter">开票信息管理</router-link>
+              <router-link class="personal-container-middle-box-collapse-personal" tag="div" to="/personal/invoiceRecoring">开票记录</router-link>
+              <router-link id="personal-container-middle-box-collapse-manage" tag="div" to="/personal/safeCenter">开票信息管理</router-link>
             </el-collapse-item>
             <div class="personal-container-middle-box-collapse-news">
                 <img src="/static/images/message.png" alt="">
-                <router-link tag="span" to="/personal/message/message">我的消息</router-link>
+                <router-link tag="span" to="/personal/message">我的消息</router-link>
             </div>
           </el-collapse>
       </div>
@@ -97,7 +97,7 @@ export default {
                 let formData=new FormData();
                 formData.append('pic',img.file);
                 formData.append('user_id',this.$cookie.getCookie('u_id'));
-                this.$http.post('/api/usercenter/upload_head',formData).then(res=>{
+                this.$http.post(this.GLOBAL.base_url+'/usercenter/upload_head',formData).then(res=>{
                   if(res.data.code == "1"){
                     this.headImage = 'http://51guolao.yiqibnb.com'+ res.data.data.head_img;
                   }  
@@ -105,7 +105,7 @@ export default {
             }
   },
   mounted(){
-    this.$http.get('/api/usercenter',{params:{
+    this.$http.get(this.GLOBAL.base_url+'/usercenter',{params:{
       user_id:this.$cookie.getCookie('u_id')
     }
     }).then(res=>{
@@ -121,14 +121,6 @@ export default {
 </script>
 
 <style scoped>
- @font-face {
-    font-family: 'centerfont'; 
-    src: url('/static/PingFang/PingFangSC-Thin.ttf');
-  }
-  @font-face {
-    font-family: 'setfont'; 
-    src: url('/static/PingFang/PingFangSC-Regular.ttf');
-  }
   .router-link-active{
     color: #f96006!important;
   }
@@ -199,7 +191,7 @@ export default {
     font-weight: 100;
     color: #333333;
     margin: 27px 0 0 36px;
-    font-family: centerfont;
+    font-family: "PingFangSC-Thin","Microsoft YaHei";
   }
   .personal-center{
     width: 1060px;
@@ -213,7 +205,7 @@ export default {
 .personal-container-middle-box-collapse-center{
   font-size: 28px;
   font-weight: 100;
-  font-family: centerfont;
+  font-family: "PingFangSC-Thin","Microsoft YaHei";
   margin: 0 0 14px 65px;
   color: #999999;
 }
@@ -221,26 +213,26 @@ export default {
   margin-right: 48px;
 }
 .personal-container-middle-box-collapse-span{
-  font-family: setfont;
+  font-family: "PingFangSC-Regular","Microsoft YaHei";
   font-size: 24px;
   color: #333333;
 }
 .personal-container-middle-box-collapse-personal{
-  font-family: centerfont;
+  font-family: "PingFangSC-Thin","Microsoft YaHei";
   font-size: 24px;
   font-weight: 100;
   margin: 16px 0 16px 80px;
   color: #666666;
 }
 .personal-container-middle-box-collapse-safe{
-  font-family: centerfont;
+  font-family: "PingFangSC-Thin","Microsoft YaHei";
   font-size: 24px;
   font-weight: 100;
   margin: 0 0 36px 80px;
   color: #666666;
 }
 #personal-container-middle-box-collapse-safe2{
-  font-family: centerfont;
+  font-family: "PingFangSC-Thin","Microsoft YaHei";
   font-size: 24px;
   font-weight: 100;
   margin-bottom: 36px;
@@ -253,7 +245,7 @@ export default {
   border-bottom: 1px solid #EBEEF5
 }
 .personal-container-middle-box-collapse-juan>span{
-  font-family: setfont;
+  font-family: "PingFangSC-Regular","Microsoft YaHei";
   font-size: 24px;
   color: #333333;
   vertical-align: middle;
@@ -267,14 +259,14 @@ export default {
   line-height: 48px;
 }
 .personal-container-middle-box-collapse-news>span{
-  font-family: setfont;
+  font-family: "PingFangSC-Regular","Microsoft YaHei";
   font-size: 24px;
   color: #333333;
   vertical-align: middle;
   margin-left: 45px;
 }
 #personal-container-middle-box-collapse-manage{
-  font-family: centerfont;
+  font-family: "PingFangSC-Thin","Microsoft YaHei";
   font-size: 24px;
   font-weight: 100;
   margin-bottom: 36px;

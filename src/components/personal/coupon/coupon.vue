@@ -157,25 +157,13 @@ export default {
 </script>
 
 <style scoped>
-    @font-face {
-      font-family: 'couponfont'; 
-      src: url('/static/PingFang/PingFangSC-Thin.ttf');
-    }
-    @font-face {
-      font-family: 'couponfont2'; 
-      src: url('/static/PingFang/PingFangSC-Regular.ttf');
-    }
-    @font-face {
-      font-family: 'couponfont3'; 
-      src: url('/static/PingFang/PingFangSC-Semibold.ttf');
-    }
     .coupon-box{
         width: 800px;
         float: left;
         margin: 64px 0 0 50px;
     }
     .coupon-box-top{
-      font-family: couponfont;
+      font-family: "PingFangSC-Thin","Microsoft YaHei";
       font-size: 28px;
       font-weight: 100;
       color: #999999;
@@ -210,7 +198,7 @@ export default {
         font-size: 56px;
         font-weight: 600;
         letter-spacing: -2px;
-       font-family: couponfont3;
+       font-family: "PingFangSC-Semibold","Microsoft YaHei";
     }
     .cupon-box-juan-div1>span{
         font-size: 24px;
@@ -223,7 +211,7 @@ export default {
     .cupon-box-juan-div2>p:nth-of-type(1){
         font-size: 12px;
         color: #999999;
-        font-family: couponfont2;
+        font-family: "PingFangSC-Regular","Microsoft YaHei";
         margin-bottom: 21px;
     }
     .cupon-box-juan-div2>p:nth-of-type(2){
@@ -231,7 +219,7 @@ export default {
         font-size: 20px;
         letter-spacing: -1px;
         text-align: center;
-        font-family: couponfont2;
+        font-family: "PingFangSC-Regular","Microsoft YaHei";
     }
     #cupon-box-juan-block{
         margin-left: 235px;
@@ -252,7 +240,7 @@ export default {
         height: 39px;
         font-size: 14px;
         color: #666666;
-        font-family: couponfont2;
+        font-family: "PingFangSC-Regular","Microsoft YaHei";
     }
     .el-tabs__item:hover{
         color:#666666;
